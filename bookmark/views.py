@@ -5,7 +5,6 @@ from bookmark.models import Bookmark
 
 
 # Create your views here.
-
 class BookmarkLV(ListView):
     model = Bookmark
 
