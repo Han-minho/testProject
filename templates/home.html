@@ -3,9 +3,10 @@
 {% load static %}
 
 {% block title %}
- home.html
+    home.html
 {% endblock title %}
-    {% block extra-style %}
+
+{% block extra-style %}
     <style type="text/css">
         .home-image {
             background-image: url("{% static 'img/lion.jpg' %}");
@@ -33,14 +34,12 @@
 {% endblock extra-style %}
 
 {% block content %}
-<div class="home-image">
-    <h2 class="title">Django - Python Web Programming</h2>
-    <h4 class="powered"><i class="fas fa-arrow-circle-right">
-        Powered by django and bootstrap.
-    </i></h4>
-</div>
-<hr style="margin:10px 0">
-<div class="row text-center">
+    <div class="home-image">
+        <h2 class="title">Django - Python Web Programming</h2>
+        <h4 class="powered"><i class="fas fa-arrow-circle-right"></i> powered by django and bootstrap.</h4>
+    </div>
+    <hr style="margin: 10px 0">
+    <div class="row text-center">
         <div class="col-sm-6">
             <h3>Bookmark App</h3>
             <p>Bookmark is a Uniform Resource Identifier (URI)
@@ -59,9 +58,9 @@
 {% endblock %}
 
 {% block footer %}
-<footer class="fixed-bottom bg-info">
-    <div class="text-white font-italic text-right mr-5">
-        Copyright &copy; 2023 DjangoBook by python6th
-    </div>
-</footer>
+    <footer class="fixed-bottom bg-info">
+        <div class="text-white font-italic text-right mr-5">
+            Copyright &copy; 2023 Django by python6th
+        </div>
+    </footer>
 {% endblock footer %}
