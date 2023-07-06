@@ -122,3 +122,6 @@ class PostUpdateView(OwnerOnlyMixin, UpdateView):
 class PostDeleteView(OwnerOnlyMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blog:index')
+
+
+
