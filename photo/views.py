@@ -1,11 +1,12 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
-from django.shortcuts import redirect
-from django.urls import reverse_lazy
-from photo.models import Album, Photo
-from mysite.views import OwnerOnlyMixin
-from photo.form import PhotoInlineFormSet
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from mysite.views import OwnerOnlyMixin
+from photo.forms import PhotoInlineFormSet
+from photo.models import Album, Photo
+
 
 # Create your views here.
 class AlbumLV(ListView):
@@ -20,13 +21,13 @@ class PhotoDV(DetailView):
     model = Photo
 
 
-class PhotoCV(LoginRequiredMixin,CreateView):
+class PhotoCV(LoginRequiredMixin, CreateView):
     model = Photo
-    fields = ('album','title','image','description')
+    fields = ('album', 'title', 'image', 'description')
     success_url = reverse_lazy('photo:index')
 
 
-class PhotoChangeLV(LoginRequiredMixin,ListView):
+class PhotoChangeLV(LoginRequiredMixin, ListView):
     model = Photo
     template_name = 'photo/photo_change_list.html'
 
@@ -34,12 +35,12 @@ class PhotoChangeLV(LoginRequiredMixin,ListView):
         return Photo.objects.filter(owner=self.request.user)
 
 
-class PhotoUV(OwnerOnlyMixin,UpdateView):
+class PhotoUV(OwnerOnlyMixin, UpdateView):
     model = Photo
     success_url = reverse_lazy('photo:index')
 
 
-class PhotoDelV(OwnerOnlyMixin,DetailView):
+class PhotoDelV(OwnerOnlyMixin, DeleteView):
     model = Photo
     success_url = reverse_lazy('photo:index')
 
@@ -52,7 +53,7 @@ class AlbumChangeLV(LoginRequiredMixin, ListView):
         return Album.objects.filter(owner=self.request.user)
 
 
-class AlbumDelV(OwnerOnlyMixin, DeleteView):
+class AlbumPhotoDelV(OwnerOnlyMixin, DeleteView):
     model = Album
     success_url = reverse_lazy('photo:index')
 
@@ -84,8 +85,6 @@ class AlbumPhotoCV(LoginRequiredMixin, CreateView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
-
-
 class AlbumPhotoUV(OwnerOnlyMixin, UpdateView):
     model = Album
     fields = ('name', 'description')
@@ -109,6 +108,3 @@ class AlbumPhotoUV(OwnerOnlyMixin, UpdateView):
             return redirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
-
-
-
