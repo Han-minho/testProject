@@ -3,8 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView, MonthArchiveView,\
-    DayArchiveView,TodayArchiveView, TemplateView, FormView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView, MonthArchiveView, \
+    DayArchiveView, TodayArchiveView, TemplateView, FormView, CreateView, UpdateView, DeleteView
 
 from blog.forms import PostSearchForm
 from blog.models import Post
@@ -122,6 +122,3 @@ class PostUpdateView(OwnerOnlyMixin, UpdateView):
 class PostDeleteView(OwnerOnlyMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blog:index')
-
-
-

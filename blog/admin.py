@@ -6,7 +6,7 @@ from blog.models import Post
 # Register your models here.
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'modify_dt','tag_list')
+    list_display = ('id', 'title', 'modify_dt', 'tag_list')
     list_filter = ('modify_dt',)
     search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}
@@ -14,5 +14,5 @@ class PostAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('tags')
 
-    def tag_list(self,post):
-        return ','.join(tag.name for tag in post.tags.all())
+    def tag_list(self, post):
+        return ', '.join(tag.name for tag in post.tags.all())
